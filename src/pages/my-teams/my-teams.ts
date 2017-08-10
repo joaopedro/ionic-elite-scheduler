@@ -1,3 +1,4 @@
+import { TournamentsPage } from './../tournaments/tournaments';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -20,6 +21,10 @@ export class MyTeamsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MyTeamsPage');
+  }
+
+  goToTournaments(){
+    this.navCtrl.push(TournamentsPage);
   }
 
 }
