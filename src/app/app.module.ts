@@ -1,3 +1,7 @@
+import { StandingsPage } from './../pages/standings/standings';
+import { TeamHomePage } from './../pages/team-home/team-home';
+import { TeamDetailPage } from './../pages/team-detail/team-detail';
+import { TeamsPage } from './../pages/teams/teams';
 import { TournamentsPage } from './../pages/tournaments/tournaments';
 import { MyTeamsPage } from './../pages/my-teams/my-teams';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,7 +17,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     MyTeamsPage,
-    TournamentsPage
+    TournamentsPage,
+    TeamsPage,
+    TeamDetailPage,
+    TeamHomePage,
+    StandingsPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +31,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     MyTeamsPage,
-    TournamentsPage
+    TournamentsPage,
+    TeamsPage,
+    TeamDetailPage,
+    TeamHomePage,
+    StandingsPage
   ],
   providers: [
     StatusBar,
