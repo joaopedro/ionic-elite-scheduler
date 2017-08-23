@@ -1,3 +1,6 @@
+import { GamePage } from './../pages/game/game';
+import { HttpModule } from '@angular/http';
+import { EliteApi } from './../shared/elite-api.services';
 import { StandingsPage } from './../pages/standings/standings';
 import { TeamHomePage } from './../pages/team-home/team-home';
 import { TeamDetailPage } from './../pages/team-detail/team-detail';
@@ -21,10 +24,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TeamsPage,
     TeamDetailPage,
     TeamHomePage,
-    StandingsPage
+    StandingsPage,
+    GamePage
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -35,11 +40,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TeamsPage,
     TeamDetailPage,
     TeamHomePage,
-    StandingsPage
+    StandingsPage,
+    GamePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    EliteApi,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
