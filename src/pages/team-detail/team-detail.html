@@ -22,7 +22,7 @@
           <h2>Record: {{teamStandings.wins}}-{{teamStandings.losses}}</h2>
           <p>Coach: {{team.coach}}</p>
         </ion-col>
-        <ion-col width-50 text-rigth>
+        <ion-col width-50 text-right>
           <button ion-button icon-left outline (click)='toggleFollow()' *ngIf="!isFollowing">
             <ion-icon name="star"></ion-icon>
             Add Favorite
@@ -32,13 +32,13 @@
           </button>
         </ion-col>
       </ion-row>
+      <ion-item>
+        <ion-label>Date Filter:</ion-label>
+        <ion-toggle [(ngModel)]='useDateFilter' (ionChange)='dateChanged()'></ion-toggle>
+        <ion-datetime displayFormat='M/D/YYYY' pickerFormat='M/D/YYYY'
+        [(ngModel)]='dateFilter' (ionChange)='dateChanged()' [(disabled)]='!useDateFilter'></ion-datetime>
+      </ion-item>
     </ion-card-content>
-    <ion-item>
-      <ion-label>Date Filter:</ion-label>
-      <ion-toggle [(ngModel)]='useDateFilter' (ionChange)='dateChanged()'></ion-toggle>
-      <ion-datetime displayFormat='M/D/YYYY' pickerFormat='M/D/YYYY'
-      [(ngModel)]='dateFilter' (ionChange)='dateChanged()' [(disabled)]='!useDateFilter'></ion-datetime>
-    </ion-item>
   </ion-card>
   <ion-list >
     <button ion-item *ngFor="let game of games" (click)='gameClicked($event, game)'>
