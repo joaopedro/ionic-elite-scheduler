@@ -1,7 +1,7 @@
 import { GamePage } from './../game/game';
 import { EliteApi } from './../../shared/elite-api.services';
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, ToastController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -29,6 +29,7 @@ export class TeamDetailPage {
 
   constructor(
     public alertController: AlertController,
+    public toastController: ToastController,
     public navCtrl: NavController, 
     public navParams: NavParams,
     private eliteApi: EliteApi) {}
@@ -103,6 +104,13 @@ export class TeamDetailPage {
             handler: () => {
               this.isFollowing = false;
               //TODO: persiste data here.
+
+              let toast = this.toastController.create({
+                message: 'You have unfollowed this team.',
+                duration: 2000,
+                position: 'bottom'
+              });
+              toast.present();
             }
           },
           { text: 'No' }
