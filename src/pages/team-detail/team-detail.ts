@@ -1,10 +1,10 @@
 import { GamePage } from './../game/game';
 import { EliteApi } from './../../shared/elite-api.services';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import * as _ from 'lodash';
-
+import * as moment from 'moment';
 /**
  * Generated class for the TeamDetailPage page.
  *
@@ -18,11 +18,17 @@ import * as _ from 'lodash';
   templateUrl: 'team-detail.html',
 })
 export class TeamDetailPage {
+  allGames: any[];
+  dateFilter: string;
   games: any[];
-  team: any;
+  team: any = {};
   private tourneyData: any;
+  teamStandings: any = {};
+  useDateFilter: any;
+  private isFollowing = false;
 
   constructor(
+    public alertController: AlertController,
     public navCtrl: NavController, 
     public navParams: NavParams,
     private eliteApi: EliteApi) {}
@@ -49,6 +55,8 @@ export class TeamDetailPage {
                     };
                   })
                   .value();
+    this.allGames = this.games;
+    this.teamStandings = _.find(this.tourneyData.standings, {'teamId': this.team.id});   
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score){
@@ -67,5 +75,44 @@ export class TeamDetailPage {
     let sourceGame = this.tourneyData.games.find(g => g.id === game.gameId);
 
     this.navCtrl.parent.parent.push(GamePage, sourceGame);
+  }
+
+  getScoreWorL(game){
+    return game.scoreDisplay ? game.scoreDisplay[0] : '';
+  }
+
+  getScoreDisplayBadgeClass(game){
+    return game.scoreDisplay.indexOf('W:') === 0 ? 'primary' : 'danger';
+  }
+  dateChanged(){
+    if(this.useDateFilter && this.dateFilter){
+      this.games = _.filter(this.allGames, g => moment(g.time).isSame(this.dateFilter, 'day'));
+    }else{
+      this.games = this.allGames;
+    }
+  }
+
+  toggleFollow(){
+    if(this.isFollowing){
+      let confirm = this.alertController.create({
+        title: 'Unfollow?',
+        message: 'Are you sure you want to unfollow?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              this.isFollowing = false;
+              //TODO: persiste data here.
+            }
+          },
+          { text: 'No' }
+        ]
+      });
+      confirm.present();
+    }else{
+      this.isFollowing = true;
+      //TODO: Add logic to persist later
+    }
+    
   }
 }
