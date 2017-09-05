@@ -1,3 +1,4 @@
+import { UserSettings } from './../../shared/user-settings.service';
 import { GamePage } from './../game/game';
 import { EliteApi } from './../../shared/elite-api.services';
 import { Component } from '@angular/core';
@@ -32,7 +33,8 @@ export class TeamDetailPage {
     public toastController: ToastController,
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private eliteApi: EliteApi) {}
+    private eliteApi: EliteApi,
+    private userSettings: UserSettings) {}
   
   ionViewDidLoad() {
     this.team = this.navParams.data;
@@ -58,6 +60,7 @@ export class TeamDetailPage {
                   .value();
     this.allGames = this.games;
     this.teamStandings = _.find(this.tourneyData.standings, {'teamId': this.team.id});   
+    this.userSettings.isFavoriteTeam(this.team.id).then(value => this.isFollowing = value);
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score){
@@ -104,6 +107,7 @@ export class TeamDetailPage {
             handler: () => {
               this.isFollowing = false;
               //TODO: persiste data here.
+              this.userSettings.unfavoriteTeam(this.team);
 
               let toast = this.toastController.create({
                 message: 'You have unfollowed this team.',
@@ -120,6 +124,7 @@ export class TeamDetailPage {
     }else{
       this.isFollowing = true;
       //TODO: Add logic to persist later
+      this.userSettings.favoriteTeam(this.team, this.tourneyData.tournament.id, this.tourneyData.tournament.name);
     }
     
   }

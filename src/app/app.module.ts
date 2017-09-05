@@ -1,3 +1,4 @@
+import { UserSettings } from './../shared/user-settings.service';
 import { GamePage } from './../pages/game/game';
 import { HttpModule } from '@angular/http';
 import { EliteApi } from './../shared/elite-api.services';
@@ -47,6 +48,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     EliteApi,
+    UserSettings,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
