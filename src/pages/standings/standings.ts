@@ -40,4 +40,12 @@ export class StandingsPage {
       
   }
 
+  getHeader(record, recordIndex, records){
+    if(recordIndex === 0 || record.division !== records[recordIndex-1].division) {
+      return record.division;
+    }
+
+    return null;
+  }
+
 }
