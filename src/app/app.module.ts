@@ -1,3 +1,4 @@
+import { MapPage } from './../pages/map/map';
 import { UserSettings } from './../shared/user-settings.service';
 import { GamePage } from './../pages/game/game';
 import { HttpModule } from '@angular/http';
@@ -11,6 +12,7 @@ import { MyTeamsPage } from './../pages/my-teams/my-teams';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { AgmCoreModule} from 'angular2-google-maps/core';
 
 import { MyApp } from './app.component';
 
@@ -26,12 +28,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TeamDetailPage,
     TeamHomePage,
     StandingsPage,
-    GamePage
+    GamePage,
+    MapPage
   ],
   imports: [
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({ apiKey: 'AIzaSyBbsOlMryAHu2ESwHHSwrDBIUU7fiENNoM' })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,7 +46,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TeamDetailPage,
     TeamHomePage,
     StandingsPage,
-    GamePage
+    GamePage,
+    MapPage
   ],
   providers: [
     StatusBar,
