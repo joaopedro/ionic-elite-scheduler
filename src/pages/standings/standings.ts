@@ -27,15 +27,16 @@ export class StandingsPage {
     let tourneyData = this.eliteApi.getCurrentTourney();
     this.standings = tourneyData.standings;
 
-    this.allStandings = _.chain(this.standings)
-      .groupBy('division')
-      .toPairs()
-      .map(item => _.zipObject(['divisionName', 'divisionStandings'], item))
-      .value();
-    console.log(this.team);
+    // INFO: Full load and transform of list, not Virtual scroll.
+    // this.allStandings = _.chain(this.standings)
+    //   .groupBy('division')
+    //   .toPairs()
+    //   .map(item => _.zipObject(['divisionName', 'divisionStandings'], item))
+    //   .value();
+    // console.log(this.team);
     
     console.log('standing', this.standings);
-    console.log('division Standings', this.allStandings);
+    //console.log('division Standings', this.allStandings);
       
   }
 

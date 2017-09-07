@@ -9,7 +9,11 @@
   <ion-navbar color='primary' >
     <ion-title>Teams</ion-title>
   </ion-navbar>
-
+  <ion-toolbar>
+    <ion-searchbar placeHolder='Search'
+                  [(ngModel)]='queryText'
+                  (ionInput)='updateTeams()'></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 
