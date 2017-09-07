@@ -19,6 +19,7 @@ export class StandingsPage {
   allStandings: any[];
   standings: any[];
   team: any;
+  divisionFilter = 'division';
   constructor(public navCtrl: NavController, public navParams: NavParams, private eliteApi: EliteApi) {
   }
 
@@ -37,7 +38,9 @@ export class StandingsPage {
     
     console.log('standing', this.standings);
     //console.log('division Standings', this.allStandings);
-      
+
+    this.allStandings = tourneyData.standings;
+    this.filterDivision();
   }
 
   getHeader(record, recordIndex, records){
@@ -48,4 +51,11 @@ export class StandingsPage {
     return null;
   }
 
+  filterDivision(){
+    if(this.divisionFilter==='all'){
+      this.standings = this.allStandings;
+    }else {
+      this.standings = _.filter(this.allStandings, s => s.division === this.team.division);
+    }
+  }
 }
